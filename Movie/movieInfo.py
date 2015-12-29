@@ -5,7 +5,9 @@ __author__ = 'jingqiwang'
 
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
-import urllib2, sys, re
+import urllib2
+import sys
+import re
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -39,12 +41,7 @@ class Spider:
         # ws = wb.active
         ws = wb.create_sheet(tag)
         ws.append(['名称', '年份', '评分', '评分人数', '链接', '导演', '编剧', '演员', '类型', '国家/地区', '语言', '上映日期', '片长', '集数'])
-        '''
-        add_info = 'insert into romance_movie values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        db = '/Users/jingqiwang/PycharmProjects/Crawler/douban/Movie/movie.db'
-        conn = sqlite3.connect(db)
-        cursor = conn.cursor()
-        '''
+
         while True:
             url = 'http://www.douban.com/tag/%s/movie?start=%s' % (tag, str(page_num * 15))
             headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0 Chrome/20.0.1132.57 Safari/536.11'}
@@ -140,11 +137,7 @@ class Spider:
                     except Exception:
                         vote = '--'
                         print link, 'vote'
-                    '''
-                    info = (title, rating, vote, link, year, director, screenwriter, actors, genres, country, language, release_date, duration, episodes)
-                    cursor.execute(add_info, info)
-                    conn.commit()
-                    '''
+
                     try:
                         ws.append([title, year, rating, vote, link, director, screenwriter, actors, genres, country, language, release_date, duration, episodes])
                     except Exception:
@@ -164,14 +157,11 @@ class Spider:
                         episodes = re.sub('[\x00-\x08]|[\x0b-\x0c]|[\x0e-\x1f]', '', episodes)
                         ws.append([title, year, rating, vote, link, director, screenwriter, actors, genres, country, language, release_date, duration, episodes])
             else:
-                '''
-                cursor.close()
-                conn.close()
-                '''
                 wb.save('movie.xlsx')
                 break
 
             page_num += 1
 
-m = Spider()
-m.crawler(u'文艺')
+if __name__ == '__main':
+    m = Spider()
+    m.crawler(u'美食')
