@@ -13,24 +13,6 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-class MovieInfo:
-    def __init__(self, title, rating, vote, link, year, director, screenwriter, actors, genres, country, language, release_date, duration, episodes):
-        self.title = title
-        self.rating = rating
-        self.vote = vote
-        self.link = link
-        self.year = year
-        self.director = director
-        self.screenwriter = screenwriter
-        self.actors = actors
-        self.genres = genres
-        self.country = country
-        self.language = language
-        self.release_date = release_date
-        self.duration = duration
-        self.episodes = episodes
-
-
 class Spider:
     def __init__(self):
         pass
