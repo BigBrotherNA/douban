@@ -44,14 +44,14 @@ class Spider:
                         rating = item.find('span', class_='rating_nums').text
                     except Exception:
                         rating = '--'
-                        print link, 'rating'
+                        # print link, 'rating'
 
                     try:
                         request = urllib2.Request(link, headers=headers)
                         response = urllib2.urlopen(request)
                         page = response.read()
                     except Exception:
-                        print link
+                        # print link
                         continue
 
                     detail = BeautifulSoup(page, 'html.parser')
@@ -59,55 +59,55 @@ class Spider:
                         year = detail.find('span', class_='year').text[1:-1]
                     except Exception:
                         year = '--'
-                        print link, 'year'
+                        # print link, 'year'
 
                     try:
                         director = detail.find('a', rel='v:directedBy').text
                     except Exception:
                         director = '--'
-                        print link, 'director'
+                        # print link, 'director'
 
                     try:
                         screenwriter = detail.find('span', text='编剧').next_sibling.next_sibling.text
                     except Exception:
                         screenwriter = '--'
-                        print link, 'screenwriter'
+                        # print link, 'screenwriter'
 
                     try:
                         actors = ' / '.join([span.text for span in detail.find('span', class_='actor').find_all('a', rel='v:starring')])
                     except Exception:
                         actors = '--'
-                        print link, 'actors'
+                        # print link, 'actors'
 
                     try:
                         genres = ' / '.join([span.text for span in detail.find_all('span', property='v:genre')])
                     except Exception:
                         genres = '--'
-                        print link, 'genres'
+                        # print link, 'genres'
 
                     try:
                         country = detail.find('span', text='制片国家/地区:').next_sibling
                     except Exception:
                         country = '--'
-                        print link, 'country'
+                        # print link, 'country'
 
                     try:
                         language = detail.find('span', text='语言:').next_sibling
                     except Exception:
                         language = '--'
-                        print link, 'language'
+                        # print link, 'language'
 
                     try:
                         release_date = ' / '.join([span.text for span in detail.find_all('span', property='v:initialReleaseDate')])
                     except Exception:
                         release_date = '--'
-                        print link, 'release_date'
+                        # print link, 'release_date'
 
                     try:
                         duration = detail.find('span', property='v:runtime').text
                     except Exception:
                         duration = '--'
-                        print link, 'duration'
+                        # print link, 'duration'
 
                     try:
                         episodes = detail.find('span', text='集数:').next_sibling
@@ -118,7 +118,7 @@ class Spider:
                         vote = detail.find('span', property='v:votes').text
                     except Exception:
                         vote = '--'
-                        print link, 'vote'
+                        # print link, 'vote'
 
                     try:
                         ws.append([title, year, rating, vote, link, director, screenwriter, actors, genres, country, language, release_date, duration, episodes])
