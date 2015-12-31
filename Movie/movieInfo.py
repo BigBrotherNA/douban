@@ -144,6 +144,6 @@ class Spider:
 
             page_num += 1
 
-if __name__ == '__main':
-    m = Spider()
-    m.crawler(u'美食')
+if __name__ == '__main__':
+    s = Spider()
+    s.crawler(u'美食')
